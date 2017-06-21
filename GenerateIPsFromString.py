@@ -20,11 +20,10 @@ def genIP(ipstr):
                         checkin = True
                         for ippart in tempip.split('.'):
                             ipp = int(ippart)
-                            if (ipp < 1) and (ipp > 255):
+                            if (ipp < 1) or (ipp > 255):
                                 checkin = False
                         if checkin:
                             finalips.append(tempip)
-
     return finalips    
 
 def main():
@@ -34,13 +33,16 @@ def main():
     if not (testcount >= 1 and testcount <= 100):
         print("Test Count out of limit!")
         sys.exit(1)
-    ipcomb = []
     
     for test in range(testcount):
         ipstr = input("")
+        if len(ipstr) < 4 or len(ipstr) > 12:
+            print("Invalid IP Address string provided!")
+            sys.exit(1)
         finalips = genIP(ipstr)
 
-    print(finalips)
+    for ipadd in finalips:
+        print(ipadd)
 
 
 if __name__ == "__main__":
